@@ -1,0 +1,73 @@
+<style>
+    .formulario{
+        width: 600px;
+        border: 2px solid #000;
+        border-radius: 5px;
+        padding: 50px;
+        margin: 100px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .box{
+        display: flex;
+        margin-bottom: 10px;
+    }
+    .label{
+        margin-right: 10px;
+        width: 150px;
+        font-size: 20px;
+    }
+    .input{
+        width: 300px;
+        align-self: flex-end;
+        height: 20px;
+        border: none;
+        border-bottom:2px solid #000;
+        background: transparent;
+    }
+    .input:focus{
+        outline: none;
+        font-size: 20px;
+    }
+    .titulo{
+        text-align: center;
+        margin-bottom: 50px;
+        font-size: 30px;
+    }
+</style>
+<form [formGroup]="myRegisterForm" (ngSubmit)="register()" [class]=formulario>
+    <h2 [class]=titulo>Registro</h2>
+    <div [class]=box >
+        <label [class]=label for="">Nombre</label>
+        <input [class]=input type="text" formControlName="nombre">
+    </div>
+    <div *ngIf="myRegisterForm.get('nombre')?.errors && myRegisterForm.get('nombre')?.dirty">
+        <p *ngIf="myRegisterForm.get('nombre')?.hasError('required')">El campo es obligatorio.</p>
+    </div>
+    <div [class]=box [ngStyle]="{'margin-top':'20px'}">
+        <label [class]=label for="">Apellido</label>
+        <input [class]=input type="text" formControlName="apellido">
+    </div>
+    <div *ngIf="myRegisterForm.get('apellido')?.errors && myRegisterForm.get('apellido')?.dirty">
+        <p *ngIf="myRegisterForm.get('apellido')?.hasError('required')">El campo es obligatorio.</p>
+    </div>
+    <div [class]=box [ngStyle]="{'margin-top':'20px'}">
+        <label [class]=label for="">Email</label>
+        <input [class]=input type="email" formControlName="email"
+            [ngClass]="{error:myRegisterForm.get('email')?.hasError('required') && myRegisterForm.get('email')?.dirty, warning: myRegisterForm.get('email')?.hasError('email')}">
+    </div>
+    <div *ngIf="myRegisterForm.get('email')?.errors && myRegisterForm.get('email')?.dirty">
+        <p *ngIf="myRegisterForm.get('email')?.hasError('required')">El campo es obligatorio.</p>
+        <p *ngIf="myRegisterForm.get('email')?.hasError('email')">El formato es invalido.</p>
+    </div>
+    <div [class]=box [ngStyle]="{'margin-top':'20px'}">
+        <label [class]=label for="">Password</label>
+        <input [class]=input type="password" formControlName="password">
+    </div>
+    <div *ngIf="myRegisterForm.get('password')?.errors && myRegisterForm.get('password')?.dirty">
+        <p *ngIf="myRegisterForm.get('password')?.hasError('required')">El campo es obligatorio.</p>
+        <p *ngIf="myRegisterForm.get('password')?.hasError('minlength')">Muy corto.</p>
+    </div>
+    <button mat-raised-button color="accent" [ngStyle]="{'margin-top':'30px'}" routerLink="/" type="submit" [disabled]="myRegisterForm.invalid">Resgistrarse</button>   
+</form>

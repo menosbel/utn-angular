@@ -1,0 +1,26 @@
+<style>
+    .navbar{
+        display: flex;
+        flex-direction:row;
+        justify-content: center;
+        background-color: #f2f2f2;
+        margin-bottom: 50px;
+    }
+    .navbar-item{
+        color: rgb(255,64,129);
+        padding: 20px;
+        font-size: 16px;
+        font-family: Arial, Helvetica, sans-serif;
+        text-decoration: none;
+    }
+    .navbar-item:hover{
+        background-color:  rgb(255,64,129);
+        cursor: pointer;
+        color: #f2f2f2;
+    }
+</style>
+
+
+<div [class]=navbar >  
+    <a *ngFor="let item of navbarItems" [class]=item.class routerLink={{item.link}}>{{item.name}}</a>  
+</div>

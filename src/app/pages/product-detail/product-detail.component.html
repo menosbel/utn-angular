@@ -1,0 +1,11 @@
+<div [ngStyle]="{'margin-left':'50px', 'width':'600px'}">
+    <img src="{{product.photo_url}}" [ngStyle]="{'width':'300px'}">
+    <hr>
+    <h1>{{product.name}}</h1>
+    <h3>{{product.price | currency}}</h3>
+    <h4>Stock: {{product.stock}}</h4>
+    <h4>{{product.description}}</h4>
+    <button mat-raised-button color="accent" routerLink="/">Volver a la pagina principal</button>
+</div>
+
+

@@ -1,0 +1,41 @@
+<style>
+    .card{
+        display: flex;
+        justify-content: center;
+        margin:30px;
+        width:150px;
+    }
+    .alert{
+        margin-left: 50px;
+        background: rgb(255,64,129);
+        color: #f2f2f2;
+        width: 300px;
+        padding: 10px 20px;
+        border-radius: 3px;
+    }
+</style>
+<h1 [ngStyle]="{'margin-left':'50px'}">Nuestros productos</h1>
+<mat-grid-list cols="3">
+    <h4 *ngIf="comprado == true" [class]=alert>Gracias por tu compra!</h4>
+    <mat-grid-tile *ngFor="let producto of productos_async | async">
+        <mat-card class="example-card" [ngStyle]="{'width':'400px'}">
+            <mat-card-header>
+              <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{producto.name | slice:0:10}}</mat-card-title>
+              <mat-card-subtitle>{{producto.price | currency}}</mat-card-subtitle>
+            </mat-card-header>
+            <div [class]=card>
+                <img mat-card-image src="{{producto.photo_url}}" [ngStyle]="{'width':'130px'}">
+            </div>
+            <mat-card-content>
+              <p>
+                {{producto.description | slice:0:100}} (...)
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <button mat-raised-button color="accent" (click)="comprar()">Comprar</button>
+              <button mat-button routerLink="/producto/{{producto.id}}">Ver detalles</button> 
+            </mat-card-actions>
+          </mat-card>
+    </mat-grid-tile>
+</mat-grid-list>
